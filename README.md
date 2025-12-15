@@ -276,13 +276,9 @@ Professional embedded workflow
 👤 Author
 Ram Axay
 Embedded Systems & Firmware Engineer
-
+VGEC Ahmedabad
 
 GitHub: https://github.com/AxayRam
 
 📄 License
 MIT License — Free to use, modify, and distribute.
-
-
-
-
