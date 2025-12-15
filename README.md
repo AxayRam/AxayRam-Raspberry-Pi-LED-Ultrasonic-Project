@@ -304,7 +304,7 @@ chmod +x led_blink ultrasonic_sensor
 
 **Ram Axay**  
 Embedded Systems & Firmware Engineer  
-VGEC Ahmedabad  
+
 
 GitHub: https://github.com/AxayRam
 
