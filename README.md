@@ -283,9 +283,6 @@ GitHub: https://github.com/AxayRam
 📄 License
 MIT License — Free to use, modify, and distribute.
 
-✅ Status
-✔ Tested on Raspberry Pi 5
-✔ Hardware verified
-✔ Interview & resume ready
+
 
 
