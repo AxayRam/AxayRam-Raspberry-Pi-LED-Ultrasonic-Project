@@ -1,145 +1,148 @@
-# Raspberry Pi 5 — LED Blink & HC-SR04 Ultrasonic Distance Sensor
-
-Production-ready embedded C project using **WiringPi** on **Raspberry Pi 5**. This README is written so you can **directly paste** it as `README.md` and follow step-by-step using **nano**.
-
----
-
-## Project Overview
-
-This project demonstrates:
-
-* GPIO output control (LED blink)
-* GPIO input/output timing (HC-SR04 ultrasonic sensor)
-* Real-time distance measurement
-* Clean compilation and execution workflow on Raspberry Pi 5
-
-All programs are written in **C**, compiled with **gcc**, and tested on real hardware.
+# Raspberry Pi 5
+## LED Blink & HC-SR04 Ultrasonic Distance Sensor
+**Embedded C | GPIO Programming | WiringPi | Linux**
 
 ---
 
-## Hardware Used
+## 📌 Project Overview
 
-* Raspberry Pi 5
-* Breadboard
-* LED (5 mm)
-* 220 Ω resistor
-* HC-SR04 Ultrasonic Sensor
-* Male–male jumper wires
-* 5 V Raspberry Pi power supply
+This project demonstrates **low-level GPIO control and real-time sensor interfacing**
+on **Raspberry Pi 5** using **Embedded C** and the **WiringPi** library.
+
+The project follows a **professional embedded systems workflow** and is suitable for:
+- Embedded Systems practice
+- Firmware fundamentals
+- Raspberry Pi GPIO learning
+- Academic labs and technical interviews
+
+All programs are written in **C**, compiled using **gcc**, and tested on real
+Raspberry Pi 5 hardware.
 
 ---
 
-## GPIO Pin Connections (BCM Numbering)
+## 🎯 Features
 
-### LED
+- GPIO output control (LED blinking)
+- GPIO input pulse measurement (HC-SR04)
+- Ultrasonic distance calculation using Time-of-Flight
+- BCM GPIO numbering
+- nano-based development workflow
+- Clean compilation and execution on Linux
 
-| Signal | Raspberry Pi Pin |
-| ------ | ---------------- |
-| LED +  | GPIO 17 (Pin 11) |
-| LED −  | GND (Pin 6)      |
+---
+
+## 🧰 Hardware Requirements
+
+| Component | Specification |
+|---------|---------------|
+| Raspberry Pi | Raspberry Pi 5 |
+| LED | 5 mm |
+| Resistor | 220 Ω |
+| Ultrasonic Sensor | HC-SR04 |
+| Breadboard | Standard |
+| Jumper Wires | Male–Male |
+| Power Supply | 5 V (Official Recommended) |
+
+---
+
+## 🔌 GPIO Pin Configuration (BCM Numbering)
+
+### LED Wiring
+
+| Signal | GPIO | Physical Pin |
+|------|------|--------------|
+| LED Anode (+) | GPIO 17 | Pin 11 |
+| LED Cathode (−) | GND | Pin 6 |
 
 Connection:
+GPIO17 → 220Ω → LED(+)
+LED(−) → GND
 
-```
-GPIO17 → 220Ω → LED Anode
-LED Cathode → GND
-```
-
----
-
-### HC-SR04 Sensor
-
-| HC-SR04 Pin | Raspberry Pi     |
-| ----------- | ---------------- |
-| VCC         | 5V (Pin 2 / 4)   |
-| GND         | GND (Pin 6)      |
-| TRIG        | GPIO 17 (Pin 11) |
-| ECHO        | GPIO 27 (Pin 13) |
-
-Note: GPIO ECHO is 3.3 V tolerant on Raspberry Pi 5, but use a voltage divider if required for safety.
+yaml
+Copy code
 
 ---
 
-## Software Requirements
+### HC-SR04 Ultrasonic Sensor Wiring
 
-* Raspberry Pi OS (64-bit recommended)
-* GCC compiler
-* WiringPi library
+| Sensor Pin | GPIO | Physical Pin |
+|-----------|------|--------------|
+| VCC | 5 V | Pin 2 / 4 |
+| GND | GND | Pin 6 |
+| TRIG | GPIO 17 | Pin 11 |
+| ECHO | GPIO 27 | Pin 13 |
+
+⚠️ **Important Note:**  
+HC-SR04 ECHO outputs **5 V**, while Raspberry Pi GPIO operates at **3.3 V**.  
+For production-safe designs, use a **voltage divider** on the ECHO pin.
 
 ---
 
-## System Preparation
+## 💻 Software Requirements
+
+- Raspberry Pi OS (64-bit recommended)
+- GCC Compiler
+- WiringPi Library
+- nano Text Editor
+
+---
+
+## 🔧 System Setup
 
 Update system:
-
 ```bash
 sudo apt update
 sudo apt upgrade -y
-```
-
 Install build tools:
 
-```bash
+bash
+Copy code
 sudo apt install -y build-essential git
-```
-
 Verify GCC:
 
-```bash
+bash
+Copy code
 gcc --version
-```
-
----
-
-## WiringPi Installation
-
-Clone and install WiringPi:
-
-```bash
+📦 WiringPi Installation
+bash
+Copy code
 git clone https://github.com/WiringPi/WiringPi.git
 cd WiringPi
 ./build
-```
-
 Verify installation:
 
-```bash
+bash
+Copy code
 gpio -v
-```
+📁 Project Directory Structure
+css
+Copy code
+Raspberry-Pi-LED-Ultrasonic-Project/
+│
+├── README.md
+├── src/
+│   ├── led_blink.c
+│   └── ultrasonic_sensor.c
+│
+├── docs/
+└── photos/
+✍️ Using nano Editor
+Create a file:
 
----
-
-## Project Directory Structure
-
-Create project folder:
-
-```bash
-cd ~
-mkdir Raspberry-Pi-LED-Ultrasonic-Project
-cd Raspberry-Pi-LED-Ultrasonic-Project
-mkdir src photos docs
-```
-
----
-
-## Using nano (Important)
-
-### Create a file
-
-```bash
+bash
+Copy code
 nano src/led_blink.c
-```
+Save and exit:
 
-### Save and exit nano
+Save → CTRL + O → Enter
 
-* Save: `CTRL + O` → Enter
-* Exit: `CTRL + X`
+Exit → CTRL + X
 
----
+🧪 Program 1: LED Blink
+File: src/led_blink.c
 
-## Program 1: LED Blink (src/led_blink.c)
-
-```c
+c
+Copy code
 #include <wiringPi.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -150,7 +153,7 @@ int main(void)
 {
     if (wiringPiSetupGpio() == -1)
     {
-        printf("WiringPi setup failed\n");
+        printf("Error: WiringPi initialization failed\n");
         return 1;
     }
 
@@ -169,13 +172,11 @@ int main(void)
 
     return 0;
 }
-```
+📏 Program 2: Ultrasonic Distance Measurement
+File: src/ultrasonic_sensor.c
 
----
-
-## Program 2: Ultrasonic Sensor (src/ultrasonic_sensor.c)
-
-```c
+c
+Copy code
 #include <wiringPi.h>
 #include <stdio.h>
 #include <time.h>
@@ -184,7 +185,7 @@ int main(void)
 #define TRIG_PIN 17
 #define ECHO_PIN 27
 
-float measureDistance()
+float measureDistance(void)
 {
     digitalWrite(TRIG_PIN, HIGH);
     delayMicroseconds(10);
@@ -200,16 +201,14 @@ float measureDistance()
     clock_gettime(CLOCK_MONOTONIC, &end);
 
     long duration = (end.tv_nsec - start.tv_nsec) / 1000;
-    float distance = (duration * 0.0343) / 2.0;
-
-    return distance;
+    return (duration * 0.0343f) / 2.0f;
 }
 
 int main(void)
 {
     if (wiringPiSetupGpio() == -1)
     {
-        printf("WiringPi setup failed\n");
+        printf("Error: WiringPi initialization failed\n");
         return 1;
     }
 
@@ -218,109 +217,82 @@ int main(void)
 
     while (1)
     {
-        float d = measureDistance();
-        printf("Distance: %.2f cm\n", d);
+        float distance = measureDistance();
+        printf("Distance: %.2f cm\n", distance);
         sleep(1);
     }
 
     return 0;
 }
-```
-
----
-
-## Compilation
-
-From project root:
-
-```bash
+⚙️ Compilation
+bash
+Copy code
 cd ~/Raspberry-Pi-LED-Ultrasonic-Project
-```
 
-Compile LED program:
-
-```bash
 gcc src/led_blink.c -o led_blink -lwiringPi
-```
-
-Compile ultrasonic program:
-
-```bash
 gcc src/ultrasonic_sensor.c -o ultrasonic_sensor -lwiringPi
-```
+▶️ Execution
+⚠️ GPIO access requires sudo
 
----
-
-## Running the Programs
-
-GPIO access **requires sudo**.
-
-### Run LED blink
-
-```bash
+bash
+Copy code
 sudo ./led_blink
-```
-
-### Run ultrasonic sensor
-
-```bash
 sudo ./ultrasonic_sensor
-```
+Stop program:
 
-Stop execution:
-
-```text
+objectivec
+Copy code
 CTRL + C
-```
+🛠 Troubleshooting
+WiringPi not found
 
----
-
-## Common Errors & Fixes
-
-### Permission denied
-
-```bash
-chmod +x led_blink ultrasonic_sensor
-```
-
-### WiringPi not found
-
-```bash
+bash
+Copy code
 sudo apt install wiringpi
-```
+Permission denied
 
-### LED not glowing
+bash
+Copy code
+chmod +x led_blink ultrasonic_sensor
+LED not glowing
 
-* Check LED polarity
-* Check 220 Ω resistor
-* Confirm GPIO 17 connection
+Check LED polarity
 
----
+Verify 220 Ω resistor
 
-## Learning Outcomes
+Confirm GPIO 17 connection
 
-* GPIO configuration using WiringPi
-* Digital input/output control
-* Ultrasonic time-of-flight measurement
-* Embedded C compilation on Linux
-* Hardware–software integration
+📚 Learning Outcomes
+GPIO configuration using WiringPi
 
----
+Embedded C programming on Linux
 
-## Author
+Ultrasonic sensor timing & distance calculation
 
-**Ram Axay**
+Hardware–software integration
+
+Professional embedded workflow
+
+👤 Author
+Ram Axay
 Embedded Systems & Firmware Engineer
-VGEC Ahmedabad
 
-GitHub: [https://github.com/AxayRam](https://github.com/AxayRam)
+
+GitHub: https://github.com/AxayRam
+
+📄 License
+MIT License — Free to use, modify, and distribute.
+
+✅ Status
+✔ Tested on Raspberry Pi 5
+✔ Hardware verified
+✔ Interview & resume ready
+
+yaml
+Copy code
 
 ---
 
-## License
-
-MIT License
-
----
-
-This README is **ready to paste** and use directly with `nano` on Raspberry Pi 5.
+### Final Use Command
+```bash
+nano README.md
