@@ -1,5 +1,5 @@
-# Raspberry Pi 5
-## LED Blink & HC-SR04 Ultrasonic Distance Sensor
+# Raspberry Pi 5  
+## LED Blink & HC-SR04 Ultrasonic Distance Sensor  
 **Embedded C | GPIO Programming | WiringPi | Linux**
 
 ---
@@ -10,10 +10,10 @@ This project demonstrates **low-level GPIO control and real-time sensor interfac
 on **Raspberry Pi 5** using **Embedded C** and the **WiringPi** library.
 
 The project follows a **professional embedded systems workflow** and is suitable for:
-- Embedded Systems practice
-- Firmware fundamentals
-- Raspberry Pi GPIO learning
-- Academic labs and technical interviews
+- Embedded Systems practice  
+- Firmware fundamentals  
+- Raspberry Pi GPIO learning  
+- Academic labs and technical interviews  
 
 All programs are written in **C**, compiled using **gcc**, and tested on real
 Raspberry Pi 5 hardware.
@@ -55,11 +55,10 @@ Raspberry Pi 5 hardware.
 | LED Cathode (−) | GND | Pin 6 |
 
 Connection:
+```
 GPIO17 → 220Ω → LED(+)
 LED(−) → GND
-
-yaml
-Copy code
+```
 
 ---
 
@@ -93,30 +92,38 @@ Update system:
 ```bash
 sudo apt update
 sudo apt upgrade -y
+```
+
 Install build tools:
-
-bash
-Copy code
+```bash
 sudo apt install -y build-essential git
-Verify GCC:
+```
 
-bash
-Copy code
+Verify GCC:
+```bash
 gcc --version
-📦 WiringPi Installation
-bash
-Copy code
+```
+
+---
+
+## 📦 WiringPi Installation
+
+```bash
 git clone https://github.com/WiringPi/WiringPi.git
 cd WiringPi
 ./build
-Verify installation:
+```
 
-bash
-Copy code
+Verify installation:
+```bash
 gpio -v
-📁 Project Directory Structure
-css
-Copy code
+```
+
+---
+
+## 📁 Project Directory Structure
+
+```
 Raspberry-Pi-LED-Ultrasonic-Project/
 │
 ├── README.md
@@ -126,23 +133,28 @@ Raspberry-Pi-LED-Ultrasonic-Project/
 │
 ├── docs/
 └── photos/
-✍️ Using nano Editor
+```
+
+---
+
+## ✍️ Using nano Editor
+
 Create a file:
-
-bash
-Copy code
+```bash
 nano src/led_blink.c
+```
+
 Save and exit:
+- Save → `CTRL + O` → Enter
+- Exit → `CTRL + X`
 
-Save → CTRL + O → Enter
+---
 
-Exit → CTRL + X
+## 🧪 Program 1: LED Blink
 
-🧪 Program 1: LED Blink
-File: src/led_blink.c
+**File:** `src/led_blink.c`
 
-c
-Copy code
+```c
 #include <wiringPi.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -172,11 +184,15 @@ int main(void)
 
     return 0;
 }
-📏 Program 2: Ultrasonic Distance Measurement
-File: src/ultrasonic_sensor.c
+```
 
-c
-Copy code
+---
+
+## 📏 Program 2: Ultrasonic Distance Measurement
+
+**File:** `src/ultrasonic_sensor.c`
+
+```c
 #include <wiringPi.h>
 #include <stdio.h>
 #include <time.h>
@@ -224,61 +240,79 @@ int main(void)
 
     return 0;
 }
-⚙️ Compilation
-bash
-Copy code
+```
+
+---
+
+## ⚙️ Compilation
+
+```bash
 cd ~/Raspberry-Pi-LED-Ultrasonic-Project
 
 gcc src/led_blink.c -o led_blink -lwiringPi
 gcc src/ultrasonic_sensor.c -o ultrasonic_sensor -lwiringPi
-▶️ Execution
-⚠️ GPIO access requires sudo
+```
 
-bash
-Copy code
+---
+
+## ▶️ Execution
+
+⚠️ GPIO access requires **sudo**
+
+```bash
 sudo ./led_blink
 sudo ./ultrasonic_sensor
+```
+
 Stop program:
-
-objectivec
-Copy code
+```
 CTRL + C
-🛠 Troubleshooting
-WiringPi not found
+```
 
-bash
-Copy code
+---
+
+## 🛠 Troubleshooting
+
+**WiringPi not found**
+```bash
 sudo apt install wiringpi
-Permission denied
+```
 
-bash
-Copy code
+**Permission denied**
+```bash
 chmod +x led_blink ultrasonic_sensor
-LED not glowing
+```
 
-Check LED polarity
+**LED not glowing**
+- Check LED polarity
+- Verify 220 Ω resistor
+- Confirm GPIO 17 connection
 
-Verify 220 Ω resistor
+---
 
-Confirm GPIO 17 connection
+## 📚 Learning Outcomes
 
-📚 Learning Outcomes
-GPIO configuration using WiringPi
+- GPIO configuration using WiringPi
+- Embedded C programming on Linux
+- Ultrasonic sensor timing & distance calculation
+- Hardware–software integration
+- Professional embedded workflow
 
-Embedded C programming on Linux
+---
 
-Ultrasonic sensor timing & distance calculation
+## 👤 Author
 
-Hardware–software integration
-
-Professional embedded workflow
-
-👤 Author
-Ram Axay
-Embedded Systems & Firmware Engineer
-VGEC Ahmedabad
+**Ram Axay**  
+Embedded Systems & Firmware Engineer  
+VGEC Ahmedabad  
 
 GitHub: https://github.com/AxayRam
 
-📄 License
+---
+
+## 📄 License
+
 MIT License — Free to use, modify, and distribute.
+
+---
+
