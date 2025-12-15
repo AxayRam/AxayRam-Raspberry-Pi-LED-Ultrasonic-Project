@@ -288,11 +288,4 @@ MIT License — Free to use, modify, and distribute.
 ✔ Hardware verified
 ✔ Interview & resume ready
 
-yaml
-Copy code
 
----
-
-### Final Use Command
-```bash
-nano README.md
